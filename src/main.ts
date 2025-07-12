@@ -3,8 +3,16 @@ import { animate } from 'animejs';
 
 const message = 'HAPPY BIRTHDAY';
 const container = document.getElementById('message');
+const after = document.getElementById('after-animation');
+const replayButton = document.getElementById('replay');
+const animationDuration = 4000;
 
-if (container) {
+if (replayButton) {
+  replayButton.addEventListener('click', () => {
+    window.location.reload();
+  });
+}
+if (container && after) {
   const letters = message.split('');
   const letterCount = message.replace(/\s+/g, '').length;
   let letterIndex = 0;
@@ -28,7 +36,7 @@ if (container) {
     span.style.transform = `translate(${Math.cos(angle) * radius}px, ${Math.sin(angle) * radius}px)`;
 
     animate(span, {
-      duration: 4000,
+      duration: animationDuration,
       easing: 'linear',
       onUpdate: (anim: any) => {
         const progress = anim.progress;
@@ -40,4 +48,8 @@ if (container) {
       },
     });
   });
+
+  window.setTimeout(() => {
+    after.classList.add('visible');
+  }, animationDuration);
 }
