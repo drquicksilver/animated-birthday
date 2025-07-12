@@ -16,6 +16,11 @@ if (container && after) {
   const letters = message.split('');
   const letterCount = message.replace(/\s+/g, '').length;
   let letterIndex = 0;
+  document.documentElement.style.setProperty(
+    '--message-chars',
+    letterCount.toString(),
+  );
+
   letters.forEach((char) => {
     const span = document.createElement('span');
     span.className = 'letter';
@@ -38,7 +43,7 @@ if (container && after) {
     animate(span, {
       duration: animationDuration,
       easing: 'linear',
-      onUpdate: (anim: any) => {
+      onUpdate: (anim: { progress: number }) => {
         const progress = anim.progress;
         const r = radius * (1 - progress);
         const theta = angle + rotations * Math.PI * 2 * progress;
