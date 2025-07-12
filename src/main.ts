@@ -1,7 +1,7 @@
 import './style.css';
 import { animate } from 'animejs';
 
-const message = 'HAPPY BIRTHDAY';
+const message = document.title;
 const container = document.getElementById('message');
 const after = document.getElementById('after-animation');
 const replayButton = document.getElementById('replay');
