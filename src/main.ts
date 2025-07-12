@@ -2,7 +2,7 @@ import './style.css';
 import { animate } from 'animejs';
 import * as Tone from 'tone';
 
-const message = 'HAPPY BIRTHDAY';
+const message = document.title;
 const container = document.getElementById('message');
 const after = document.getElementById('after-animation');
 const replayButton = document.getElementById('replay');
@@ -70,6 +70,7 @@ async function playHappyBirthday() {
   return totalDuration * 1000; // Convert to milliseconds
 }
 
+
 function startAnimationAndAudio() {
   if (!container || !after) return;
   console.log('Starting animation and audio playback...');
@@ -77,6 +78,11 @@ function startAnimationAndAudio() {
     const letters = message.split('');
     const letterCount = message.replace(/\s+/g, '').length;
     let letterIndex = 0;
+    document.documentElement.style.setProperty(
+      '--message-chars',
+      letterCount.toString(),
+    );
+  
     letters.forEach((char) => {
       const span = document.createElement('span');
       span.className = 'letter';
