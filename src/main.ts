@@ -5,10 +5,20 @@ const message = 'HAPPY BIRTHDAY';
 const container = document.getElementById('message');
 
 if (container) {
-  message.split('').forEach((char) => {
+  const letters = message.split('');
+  const letterCount = message.replace(/\s+/g, '').length;
+  let letterIndex = 0;
+  letters.forEach((char) => {
     const span = document.createElement('span');
     span.className = 'letter';
     span.textContent = char === ' ' ? '\u00A0' : char;
+    if (char !== ' ') {
+      const hue = (letterIndex / (letterCount - 1)) * 360;
+      const color = `hsl(${hue}, 100%, 65%)`;
+      span.style.color = color;
+      span.style.textShadow = `0 0 10px ${color}`;
+      letterIndex += 1;
+    }
     container.appendChild(span);
 
     const angle = Math.random() * Math.PI * 2;
