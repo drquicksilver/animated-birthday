@@ -3,11 +3,19 @@ import { animate } from 'animejs';
 
 const message = 'HAPPY BIRTHDAY';
 const container = document.getElementById('message');
+const after = document.getElementById('after-animation');
+const replayButton = document.getElementById('replay');
 
-if (container) {
+if (replayButton) {
+  replayButton.addEventListener('click', () => {
+    window.location.reload();
+  });
+}
+if (container && after) {
   const letters = message.split('');
   const letterCount = message.replace(/\s+/g, '').length;
   let letterIndex = 0;
+  const animations: Promise<void>[] = [];
   letters.forEach((char) => {
     const span = document.createElement('span');
     span.className = 'letter';
@@ -27,7 +35,7 @@ if (container) {
 
     span.style.transform = `translate(${Math.cos(angle) * radius}px, ${Math.sin(angle) * radius}px)`;
 
-    animate(span, {
+    const anim = animate(span, {
       duration: 4000,
       easing: 'linear',
       onUpdate: (anim: any) => {
@@ -39,5 +47,11 @@ if (container) {
         span.style.transform = `translate(${x}px, ${y}px)`;
       },
     });
+    // anime.js exposes a `finished` promise
+    animations.push((anim as any).finished);
+  });
+
+  Promise.all(animations).then(() => {
+    after.classList.add('visible');
   });
 }
