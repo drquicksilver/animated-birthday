@@ -7,7 +7,6 @@ const container = document.getElementById('message');
 const after = document.getElementById('after-animation');
 const replayButton = document.getElementById('replay');
 const startButton = document.getElementById('start-btn');
-const animationDuration = 8000; // Extended to match song duration
 
 // Happy Birthday tune notes (C major scale)
 const happyBirthdayNotes = [
