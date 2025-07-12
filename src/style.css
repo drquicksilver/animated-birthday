@@ -11,7 +11,8 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  --message-font-size: min(6vw, 4rem);
+  --message-chars: 16;
+  --message-font-size: clamp(2rem, calc(60vw / var(--message-chars)), 4rem);
 }
 
 a {
