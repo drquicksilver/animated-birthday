@@ -8,6 +8,8 @@ const domGlobals = {
   HTMLElement: 'readonly',
   HTMLButtonElement: 'readonly',
   // Add more DOM globals as needed
+  console: 'readonly',
+  setTimeout: 'readonly',
 };
 
 export default [

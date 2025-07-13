@@ -70,17 +70,17 @@ async function playHappyBirthday() {
 }
 
 
-function startAnimationAndAudio() {
+async function startAnimationAndAudio() {
   if (!container || !after) return;
   console.log('Starting animation and audio playback...');
-  playHappyBirthday().then(tuneDuration => {
-    const letters = message.split('');
-    const letterCount = message.replace(/\s+/g, '').length;
-    let letterIndex = 0;
-    document.documentElement.style.setProperty(
-      '--message-chars',
-      letterCount.toString(),
-    );
+  const tuneDuration = await playHappyBirthday();
+  const letters = message.split('');
+  const letterCount = message.replace(/\s+/g, '').length;
+  let letterIndex = 0;
+  document.documentElement.style.setProperty(
+    '--message-chars',
+    letterCount.toString(),
+  );
   
     letters.forEach((char) => {
       const span = document.createElement('span');
@@ -113,18 +113,17 @@ function startAnimationAndAudio() {
           span.style.transform = `translate(${x}px, ${y}px)`;
         },
       });
-    });
-
-    window.setTimeout(() => {
-      after.classList.add('visible');
-    }, tuneDuration);
   });
+
+  window.setTimeout(() => {
+    after.classList.add('visible');
+  }, tuneDuration);
 }
 
 if (startButton) {
-  startButton.addEventListener('click', () => {
+  startButton.addEventListener('click', async () => {
     startButton.style.display = 'none';
-    startAnimationAndAudio();
+    await startAnimationAndAudio();
   });
 }
 
